@@ -1,0 +1,1 @@
+# manually-drawing-bounding-box-XML-file
