@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<annotation>
+	<folder>annotations</folder>
+	<filename>IMG_20200222_224224.jpg</filename>
+	<path>C:\Users\ADMIN\Downloads\Automatic-License-Plate-Detection-main\Automatic-License-Plate-Detection-main\WebbApp\annotations\IMG_20200222_224224.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>3456</width>
+		<height>4608</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>number_plate</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1191</xmin>
+			<ymin>2073</ymin>
+			<xmax>2351</xmax>
+			<ymax>2498</ymax>
+		</bndbox>
+	</object>
+</annotation>

@@ -1,0 +1,114 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<header class="site-header">
+  <a class="brand" href="/" aria-label="Plate Box home">
+    <span class="brand-mark" aria-hidden="true">
+      <span></span>
+    </span>
+    <span>Plate Box</span>
+  </a>
+  <p class="header-note">PASCAL VOC annotation tool</p>
+</header>
+
+<main>
+  <section class="intro" aria-labelledby="page-title">
+    <p class="eyebrow">Simple image labeling</p>
+    <h1 id="page-title">Mark the plate.<br><em>Keep the coordinates.</em></h1>
+    <p class="lede">Upload one image or an entire folder, mark each license plate, and export training-ready XML files continuously.</p>
+  </section>
+
+  <section class="tool-card" aria-label="Bounding box annotation tool">
+    <form id="upload-form" class="upload-panel">
+      <div class="upload-choice-grid">
+        <label class="drop-zone" for="image-input" id="drop-zone">
+          <span class="upload-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="img"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/></svg>
+          </span>
+          <span>
+            <strong id="upload-label">Choose image files</strong>
+            <small>or drop them here · JPG, PNG, or WebP · max 16 MB each</small>
+          </span>
+          <span class="browse-button">Browse</span>
+        </label>
+
+        <button id="folder-button" class="folder-button" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 7.5h6l2-2h3l2 2h4v11h-17z"/><path d="M8 13h8M12 9v8"/></svg>
+          <span><strong>Choose a folder</strong><small>Label images continuously</small></span>
+        </button>
+      </div>
+      <input id="image-input" name="image" type="file" accept="image/jpeg,image/png,image/webp" multiple required>
+      <input id="folder-input" type="file" accept="image/jpeg,image/png,image/webp" webkitdirectory directory multiple>
+    </form>
+
+    <div id="editor" class="editor" hidden>
+      <div id="batch-progress" class="batch-progress" hidden>
+        <div class="batch-details">
+          <div class="batch-copy">
+            <span id="queue-count">Image 1 of 1</span>
+            <strong id="current-filename"></strong>
+          </div>
+          <div class="progress-track" aria-hidden="true"><span id="progress-fill"></span></div>
+        </div>
+        <div class="queue-actions">
+          <button id="previous-button" type="button">← Previous</button>
+          <button id="next-button" type="button">Skip image →</button>
+        </div>
+      </div>
+
+      <div class="editor-toolbar">
+        <div>
+          <p class="step-label"><span>01</span> Draw the bounding box</p>
+          <p class="hint">Click and drag from one corner of the plate to the opposite corner.</p>
+        </div>
+        <button id="clear-button" class="text-button" type="button">Clear box</button>
+      </div>
+
+      <div class="canvas-stage">
+        <div id="canvas-shell" class="canvas-shell">
+          <img id="source-image" alt="Image being annotated" draggable="false">
+          <canvas id="annotation-canvas" aria-label="Draw a bounding box on the image"></canvas>
+        </div>
+      </div>
+
+      <div class="annotation-panel">
+        <div class="field label-field">
+          <label for="class-label">Object label</label>
+          <input id="class-label" type="text" value="number_plate" maxlength="64" autocomplete="off">
+        </div>
+
+        <fieldset class="coordinates">
+          <legend>Box coordinates <span>pixels</span></legend>
+          <label>X min<input id="xmin" inputmode="numeric" type="number" min="0" disabled></label>
+          <label>Y min<input id="ymin" inputmode="numeric" type="number" min="0" disabled></label>
+          <label>X max<input id="xmax" inputmode="numeric" type="number" min="0" disabled></label>
+          <label>Y max<input id="ymax" inputmode="numeric" type="number" min="0" disabled></label>
+        </fieldset>
+
+        <button id="save-button" class="save-button" type="button" disabled>
+          <span id="save-label">Save XML</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div id="empty-state" class="empty-state">
+      <span>01</span>
+      <p>Your annotation workspace will appear here.</p>
+    </div>
+
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+  </section>
+
+  <section class="how-it-works" aria-label="How it works">
+    <article><span>01</span><div><strong>Upload</strong><p>Select an image or a whole folder.</p></div></article>
+    <article><span>02</span><div><strong>Draw</strong><p>Drag a box around the plate.</p></div></article>
+    <article><span>03</span><div><strong>Save & continue</strong><p>Store the image and XML together, then continue.</p></div></article>
+  </section>
+</main>
+
+<footer>
+  <p>Built for clean, dependable dataset labeling.</p>
+  <p>Coordinates are saved at the image's original resolution.</p>
+</footer>
+{% endblock %}

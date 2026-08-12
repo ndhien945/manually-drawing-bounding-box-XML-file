@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Draw a bounding box and export a PASCAL VOC XML annotation.">
+    <title>{% block title %}Plate Box{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body>
+    {% block body %}{% endblock %}
+    <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+  </body>
+</html>
